@@ -167,10 +167,8 @@ async function init() {
         : path.join(process.cwd(), agent.local);
 
       if (agent.supports.includes('rules')) {
-        const rulesDir = path.join(agentDir, 'rules');
-        ensureDir(rulesDir);
         for (const [filename, content] of Object.entries(getRules(config))) {
-          writeFile(path.join(rulesDir, filename), content);
+          writeFile(path.join(agentDir, 'rules', filename), content);
         }
       }
 
