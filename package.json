@@ -1,0 +1,31 @@
+{
+  "name": "kelar",
+  "version": "1.0.0",
+  "description": "The AI execution system that stops your coding agent from going rogue. Rules, skills & workflows for Antigravity, Claude Code, and Cursor — install in one command.",
+  "keywords": [
+    "meta-prompting",
+    "context-engineering",
+    "project-tracker",
+    "vibe-coding",
+    "claude-code",
+    "antigravity"
+  ],
+  "author": "zaadevofc",
+  "license": "MIT",
+  "bin": {
+    "kelar": "./bin/kelar.js"
+  },
+  "main": "./src/index.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "kleur": "^4.1.5",
+    "prompts": "^2.4.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zeative/kelar"
+  }
+}
