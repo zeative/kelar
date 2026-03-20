@@ -8,7 +8,7 @@
 
 *The AI execution system for developers who are done babysitting.*
 
-[![npm](https://img.shields.io/npm/v/kelar?style=flat-square&color=000)](https://npmjs.com/package/kelar)
+[![npm](https://img.shields.io/npm/v/kelar-cli?style=flat-square&color=000)](https://npmjs.com/package/kelar-cli)
 [![license](https://img.shields.io/badge/license-MIT-000?style=flat-square)](./LICENSE)
 [![works with](https://img.shields.io/badge/works%20with-Antigravity%20·%20Claude%20Code%20·%20Cursor-000?style=flat-square)](.)
 
@@ -49,7 +49,7 @@ The result: instead of building, you're reviewing every line, re-explaining your
 ## Install
 
 ```bash
-npx kelar init
+npx kelar-cli init
 ```
 
 Your preferences are saved to `~/.kelar/config.json` and reused next time.
@@ -307,7 +307,7 @@ Your preferences live at `~/.kelar/config.json`:
 }
 ```
 
-Re-run `npx kelar init` anytime to update preferences.
+Re-run `npx kelar-cli init` anytime to update preferences.
 
 **`autoCommit`** options:
 - `"auto"` — commit after every micro-task automatically
@@ -370,7 +370,7 @@ then spent twice as long managing the AI.
 <br/>
 
 ```bash
-npx kelar init
+npx kelar-cli init
 ```
 
 </div>

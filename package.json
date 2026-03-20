@@ -1,5 +1,5 @@
 {
-  "name": "kelar",
+  "name": "kelar-cli",
   "version": "1.0.0",
   "description": "The AI execution system that stops your coding agent from going rogue. Rules, skills & workflows for Antigravity, Claude Code, and Cursor — install in one command.",
   "keywords": [
