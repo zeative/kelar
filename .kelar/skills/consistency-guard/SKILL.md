@@ -1,117 +1,82 @@
 ---
 name: consistency-guard
 description: >
-  Activate when working on UI components, adding new modules, creating new files in existing
-  layers, or when the user asks to "match", "follow the style", "be consistent", or "like the
-  existing ones". Also auto-activates during pre-execution phase for any UI-related task.
-  Triggers on: "component", "UI", "design", "style", "layout", "page", "screen", "match existing"
+  Ensures new code matches existing patterns at both UI and backend levels.
+  This skill should be used when working on UI components, creating new modules,
+  adding new files to existing layers, or when the user asks to match/follow/be
+  consistent with existing style. Triggers on: "component", "UI", "design", "style",
+  "layout", "page", "screen", "match existing", "follow the pattern".
+allowed-tools:
+  - Read
+  - Glob
+  - Grep
 ---
 
-# KELAR Skill: Consistency Guard
+# Consistency Guard
 
 Every new piece must look and feel like it was always there.
 
----
-
 ## PHASE 1: PATTERN SCAN
 
-Before writing anything, scan the existing codebase for patterns.
-
-### For UI/Frontend Tasks:
-
-**Scan these specifically:**
-1. Find 2-3 existing components/pages most similar to what you're building
-2. Extract: spacing values, color usage, component structure, state management pattern
-3. Find the design token file (CSS variables, theme file, constants)
-4. Check how loading/error/empty states are handled
-
-**Output:**
+**For UI:**
 ```
-KELAR CONSISTENCY SCAN — UI
-────────────────────────────
-Reference files : [files you scanned]
-Spacing scale   : [values in use — e.g. 4, 8, 16, 24, 32px]
-Colors          : [tokens in use — e.g. var(--color-primary)]
-Component shape : [how components are structured]
-State handling  : [how loading/error/empty states work]
-Icon system     : [what icon library/system is used]
-Animation       : [transition values in use]
+Ref files  : [2-3 most similar components/pages]
+Spacing    : [values in use — e.g. 4, 8, 16, 24px]
+Colors     : [tokens — e.g. var(--color-primary)]
+Components : [structure pattern]
+States     : [loading/error/empty patterns]
+Icons      : [library in use]
+Animation  : [transition values]
 ```
 
-### For Backend/Logic Tasks:
-
-**Scan these specifically:**
-1. Find existing modules in the same layer (service, repo, controller, etc.)
-2. Extract: function signature patterns, return types, error throwing pattern
-3. Find how the module is exported and imported elsewhere
-4. Check how similar operations are named
-
-**Output:**
+**For Backend:**
 ```
-KELAR CONSISTENCY SCAN — BACKEND  
-──────────────────────────────────
-Reference files  : [files you scanned]
-Function pattern : [how functions are structured]
-Return pattern   : [what functions return]
-Error pattern    : [how errors are thrown]
-Export pattern   : [how modules are exported]
-Naming pattern   : [how similar things are named]
+Ref files  : [existing modules in same layer]
+Functions  : [signature pattern]
+Returns    : [what functions return]
+Errors     : [how errors are thrown]
+Exports    : [module export pattern]
+Naming     : [how similar things are named]
 ```
 
----
-
-## PHASE 2: CONSISTENCY MAPPING
-
-Map what you're about to build to what already exists.
+## PHASE 2: CONSISTENCY MAP
 
 ```
 KELAR CONSISTENCY MAP
 ─────────────────────
-Building      : [what you're creating]
-Should match  : [reference file/component]
-Will reuse    : [existing utilities/components/functions]
-Will mirror   : [patterns from reference]
-Will NOT invent: [things you won't create from scratch because they exist]
+Building   : [what you're creating]
+Matches    : [reference file/component]
+Will reuse : [existing utilities/components]
+Will NOT invent: [things that already exist]
 ```
 
----
+## PHASE 3: DEVIATION ALERT
 
-## PHASE 3: DEVIATION ALERTS
-
-If the task REQUIRES deviating from existing patterns (new pattern needed):
-
+If REQUIRED to deviate from existing patterns:
 ```
 KELAR DEVIATION ALERT
 ─────────────────────
-Pattern     : [what pattern needs to change or be new]
-Reason      : [why existing pattern doesn't work here]
-Proposal    : [what new pattern you propose]
-Impact      : [does this affect other files?]
+Pattern  : [what needs to change]
+Reason   : [why existing doesn't work here]
+Proposal : [new pattern]
+Impact   : [affects other files?]
 
 Approve deviation? (yes/no)
 ```
 
-**Do not deviate without explicit user approval.**
+**Do NOT deviate without explicit approval.**
 
----
+## PHASE 4: VERIFICATION
 
-## PHASE 4: CONSISTENCY VERIFICATION
+**UI:**
+- [ ] Only existing color tokens (no new hex/rgb values)
+- [ ] Existing spacing scale (no arbitrary pixel values)
+- [ ] Component structure matches reference
+- [ ] Loading/error/empty states match existing
+- [ ] Responsive behavior matches existing
 
-After implementation, verify before marking done:
-
-**UI Checklist:**
-- [ ] Uses only existing color tokens (no new hex/rgb values)
-- [ ] Uses existing spacing scale (no arbitrary pixel values)
-- [ ] Component structure matches reference component
-- [ ] Loading state matches existing loading pattern
-- [ ] Error state matches existing error pattern
-- [ ] Empty state matches existing empty pattern
-- [ ] Responsive behavior matches existing components
-- [ ] Animations use existing transition values
-
-**Backend Checklist:**
-- [ ] Function signatures match existing layer conventions
+**Backend:**
+- [ ] Function signatures match layer conventions
 - [ ] Return types consistent with similar functions
 - [ ] Error types match existing error system
-- [ ] Module exports match existing pattern
-- [ ] Naming follows existing conventions in this layer
+- [ ] Exports match existing pattern
