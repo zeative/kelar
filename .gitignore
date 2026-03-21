@@ -1,6 +1,5 @@
 node_modules
 
 bun.lock
-# KELAR
-.kelar/
+
 .agent/
