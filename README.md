@@ -1,48 +1,114 @@
 <div align="center">
 
-# **KELAR**
-
-<br/>
+# KELAR
 
 **Kept Efficient, Logical, Atomic, Resilient**
 
-*The AI execution system for developers who are done babysitting.*
+> *"Lo nggak asal vibe coding. Lo KELAR-in."*
 
 [![npm](https://img.shields.io/npm/v/kelar-cli?style=flat-square&color=000)](https://npmjs.com/package/kelar-cli)
 [![license](https://img.shields.io/badge/license-MIT-000?style=flat-square)](./LICENSE)
-[![works with](https://img.shields.io/badge/works%20with-Antigravity%20·%20Claude%20Code%20·%20Cursor-000?style=flat-square)](.)
+[![works with](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Antigravity%20·%20Cursor-000?style=flat-square)](.)
 
-<br/>
-
-> **"You don't vibe code. You KELAR it."**
->
-> *"Lo nggak asal vibe coding. Lo KELAR-in."*
-
-<br/>
-
-[Why KELAR](#why-kelar) · [Install](#install) · [Commands](#commands) · [How It Works](#how-it-works) · [File Structure](#file-structure) · [Philosophy](#philosophy)
+```bash
+npx kelar-cli@latest init
+```
 
 </div>
 
 ---
 
-## Why KELAR
+## The Problem
 
-KELAR is a layer of rules, skills, and workflows that sits on top of your AI coding agent — Antigravity, Claude Code, or Cursor — and makes it behave like a senior developer instead of an unpredictable intern.
+AI coding tools fail in predictable ways. You ask for a feature — it touches files you didn't mention, hardcodes values, ignores your patterns. You ask it to fix a bug — it wraps the symptom in a try-catch. You hit a context limit — it greets you like a stranger.
 
-It reads your codebase before touching it. It makes a plan and waits for your approval. It never touches files outside its scope. And when your session breaks mid-task, it picks up exactly where it left off.
-
-> *"You describe what you want. KELAR handles the rest."*
+KELAR fixes that. It's a layer of **rules, skills, agents, and workflows** that sits on top of your AI agent and makes it behave like a senior developer.
 
 ---
 
-## The problem
+## How It Works
 
-AI coding tools fail in predictable ways.
+KELAR has four layers. Each one does a different job.
 
-You ask for a feature. It modifies files you didn't mention, hardcodes your secrets, ignores the patterns you've established, and ships something that technically runs but isn't yours. You ask it to fix a bug. It wraps the symptom in a try-catch. You hit a context limit, open a new chat, and it greets you like a stranger.
+```mermaid
+graph TD
+    A[🔴 Rules<br/>Always-on guardrails] --> E[Your Codebase]
+    B[🟡 Skills<br/>Context-triggered protocols] --> E
+    C[🟢 Workflows<br/>Structured command flows] --> E
+    D[🔵 Agents<br/>Specialized sub-AI spawned per task] --> E
 
-The result: instead of building, you're reviewing every line, re-explaining your architecture, and cleaning up the mess. You're not using AI — you're supervising it.
+    style A fill:#1a1a1a,stroke:#ef4444,color:#fff
+    style B fill:#1a1a1a,stroke:#eab308,color:#fff
+    style C fill:#1a1a1a,stroke:#22c55e,color:#fff
+    style D fill:#1a1a1a,stroke:#3b82f6,color:#fff
+    style E fill:#0f0f0f,stroke:#333,color:#888
+```
+
+```mermaid
+graph LR
+    subgraph state [".kelar/state/ — living memory"]
+        S1[STATE.md]
+        S2[TASKS.md]
+        S3[PATTERNS.md]
+        S4[HANDOFF.md]
+    end
+    subgraph memory [".kelar/memory/ — knowledge base"]
+        M1[domain/]
+        M2[technical/]
+        M3[solutions/]
+    end
+    subgraph tools ["kelar-tools.cjs — CLI utility"]
+        T1[state · tasks · git]
+        T2[memory · patterns · plan]
+        T3[debt · session · health]
+    end
+```
+
+---
+
+## Multi-Agent Pipeline
+
+The core of KELAR v2. When you run `/kelar:feature`, it orchestrates specialized agents — some in parallel, some sequential — each with a fresh context window.
+
+```mermaid
+flowchart TD
+    U([User Request]) --> O[Orchestrator]
+
+    O --> R[kelar-researcher]
+    O --> UI[kelar-ui-designer]
+
+    R --> P[kelar-planner]
+    UI --> P
+
+    P --> C[kelar-plan-checker]
+    C -->|REJECTED| P
+    C -->|APPROVED| G{User Gate}
+
+    G -->|yes| W1
+
+    subgraph W1 [Wave 1 — parallel]
+        E1[kelar-executor]
+        E2[kelar-executor]
+        E3[kelar-executor]
+    end
+
+    subgraph W2 [Wave 2 — sequential]
+        E4[kelar-executor]
+    end
+
+    W1 --> REP{Verify}
+    REP -->|fail| FIX[kelar-repair]
+    FIX --> W2
+    REP -->|pass| W2
+
+    W2 --> V[kelar-verifier]
+    V --> DONE([✅ Complete])
+
+    style G fill:#1a1a2e,stroke:#7c3aed,color:#fff
+    style DONE fill:#1a1a1a,stroke:#22c55e,color:#fff
+    style W1 fill:#0f172a,stroke:#3b82f6
+    style W2 fill:#0f172a,stroke:#3b82f6
+```
 
 ---
 
@@ -52,198 +118,121 @@ The result: instead of building, you're reviewing every line, re-explaining your
 npx kelar-cli@latest init
 ```
 
-Your preferences are saved to `~/.kelar/config.json` and reused next time.
-
-### Manual Install
-
-```bash
-# Antigravity (local)
-cp -r .kelar/.agent /your-project/.agent
-
-# Claude Code (local)
-cp -r .kelar/.claude /your-project/.claude
-
-# Global (all projects)
-cp -r .kelar/.agent ~/.agent
-```
-
----
-
-## First Run
+Then run once on any project:
 
 ```bash
 /kelar:map
 ```
 
-Run **once** on any existing project. AI scans your entire codebase and writes a comprehensive architecture map — structure, conventions, patterns, anti-patterns — to `.kelar/state/STATE.md`. After this, KELAR knows your project cold.
-
-> 💡 **Indo:** Jalankan `/kelar:map` sekali. AI scan codebase lo, tulis peta arsitektur ke `.kelar/state/STATE.md`. Setelah itu AI ngerti project lo sebelum ngapa-ngapain.
+*KELAR scans your codebase and writes a full architecture map to `.kelar/state/STATE.md`. After this, every agent knows your project cold.*
 
 ---
 
 ## Commands
 
-| Command | What It Does | Use When |
-|---------|-------------|----------|
-| `/kelar:map` | Scan + understand codebase | First time, or after major restructure |
-| `/kelar:feature [desc]` | Build a feature end-to-end | Any new functionality |
-| `/kelar:fix [error/desc]` | Debug + fix with root cause analysis | Errors, unexpected behavior |
-| `/kelar:quick [desc]` | Small focused task | 1–3 file changes |
-| `/kelar:pause` | Save full state | Context limit, end of session |
-| `/kelar:resume` | Restore from checkpoint | New session, model switch |
-| `/kelar:status` | View current progress | "Where were we?" |
+| Command | What it does |
+|---------|-------------|
+| `/kelar:map` | Scan codebase — run once per project |
+| `/kelar:feature [desc]` | Full multi-agent feature pipeline |
+| `/kelar:fix [error]` | Root cause debug + verified fix |
+| `/kelar:quick [desc]` | Small focused task, 1–3 files |
+| `/kelar:status` | Live project dashboard |
+| `/kelar:pause` | Save session state before stopping |
+| `/kelar:resume` | Restore exactly where you left off |
 
 ---
 
-## How It Works
+## Agents
 
-Three layers. Each one doing a different job.
+Nine specialized sub-agents, each with a single responsibility and a fresh context window.
 
-```
-┌──────────────────────────────────────────────────────────┐
-│  LAYER 3 · WORKFLOWS                                     │
-│  /kelar:feature  /kelar:fix  /kelar:quick  ...           │
-│  Structured flows with mandatory human approval gates    │
-├──────────────────────────────────────────────────────────┤
-│  LAYER 2 · SKILLS                                        │
-│  Auto-triggered protocols based on task context          │
-│  pattern-memory · reasoning-quality · impact-radar       │
-│  execution-efficiency · deep-debug · safe-execution      │
-├──────────────────────────────────────────────────────────┤
-│  LAYER 1 · RULES                                         │
-│  Always-on guardrails — every task, zero exceptions      │
-│  code-quality · scope-guard · consistency                │
-└──────────────────────────────────────────────────────────┘
-              reads/writes
-┌──────────────────────────────────────────────────────────┐
-│  .kelar/state/   — living memory across all sessions     │
-│  STATE · TASKS · PATTERNS · ASSUMPTIONS · DEBT · DIARY  │
-└──────────────────────────────────────────────────────────┘
-```
+| Agent | Role |
+|-------|------|
+| `kelar-planner` | Creates XML task plans — precise enough for executors to work without asking questions |
+| `kelar-executor` | Implements one task at a time from a plan |
+| `kelar-researcher` | Investigates libraries, APIs, and codebase patterns before planning starts |
+| `kelar-plan-checker` | Validates plans before execution — catches bad tasks before they waste time |
+| `kelar-verifier` | Confirms goals were actually achieved, not just that code compiled |
+| `kelar-debugger` | Traces bugs 3+ levels deep to root cause. Never patches symptoms |
+| `kelar-repair` | Autonomous recovery: Retry → Decompose → Prune before escalating to you |
+| `kelar-ui-designer` | Design contracts and all 8 component states before any UI code is written |
+| `kelar-codebase-mapper` | Full architecture analysis — stack, layers, conventions, anti-patterns |
 
 ---
 
-### Layer 1 — Rules (Always Active)
+## Skills
 
-Run on every single task. Silently. Non-negotiable.
+Fourteen context-triggered protocols. Auto-activated based on task type — lightweight for small tasks, thorough for complex ones.
 
-**`code-quality`**
-Zero hardcode. Scan before write. Max 20 lines per function. Error handling mandatory. Self-check before done. Auto-commit behavior based on your preference.
-
-**`scope-guard`**
-Touch only what you're asked to touch. Out-of-scope issues → logged to `.kelar/state/DEBT.md`, never silently "fixed". You are a surgeon, not a janitor.
-
-**`consistency`**
-Pattern hierarchy: same file → same layer → codebase → industry standard. Deviations require explicit approval.
-
----
-
-### Layer 2 — Skills (On-Demand)
-
-Auto-triggered by context. Lightweight for small tasks, thorough for big ones.
-
-**🧠 `pattern-memory`** — Approved once. Applied forever.
-Stores every architectural decision in `.kelar/state/PATTERNS.md`. Read every session. AI never asks the same question twice.
-
-**🦆 `reasoning-quality`** — Think before building.
-Rubber duck (explain the approach) + Devil's advocate (attack your own plan) before any complex task. Only when it matters.
-
-**📡 `impact-radar`** — Know your blast radius.
-Scans all dependents before modifying any existing file. Generates a Before/After Contract — the exact definition of done.
-
-**⚡ `execution-efficiency`** — Scripts beat manual edits.
-1–3 files: manual. 3–10 files, same pattern: CLI one-liner. 10+ files: generated script. Recurring task: code generator. All scripts saved to `.kelar/scripts/`.
-
-**🔍 `pre-execution`** — Explore → Plan → Approve → Execute.
-No code written without a plan you've approved. Reads files, extracts patterns, breaks task into atomic micro-tasks, waits for your go.
-
-**🐛 `deep-debug`** — Root cause, not symptom.
-Traces 3+ levels deep. Presents 2–3 fix options. Never patches symptoms.
-
-**🎨 `consistency-guard`** — Looks like it was always there.
-Scans existing components before creating new ones. Flags deviations before they're written.
-
-**🛡️ `safe-execution`** — See it before it happens.
-Git checkpoint before significant changes. Diff preview before apply. Instant rollback available.
-
----
-
-### Layer 3 — Workflows
-
-#### `/kelar:feature`
-
+```mermaid
+mindmap
+  root((KELAR Skills))
+    Planning
+      pre-execution
+      reasoning-quality
+      pattern-memory
+    Execution
+      execution-efficiency
+      safe-execution
+      impact-radar
+    Quality
+      code-quality
+      ui-quality
+      consistency-guard
+    Session
+      activity-tracker
+      context-bootstrap
+      advanced-knowledge
+    Debug
+      deep-debug
+      mcp-radar
+      model-aware-execution
 ```
-BRIEF → EXPLORE → PLAN → YOU APPROVE → EXECUTE (waves) → VERIFY
-```
-
-Work is grouped into **waves** — sequential batches of atomic micro-tasks. Every task tracked in `.kelar/state/TASKS.md`. Auto-commits based on your configured preference.
-
-```
-WAVE 1 · Foundation     WAVE 2 · Core Logic     WAVE 3 · Integration
-┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐
-│ [x] 1.1 Schema   │    │ [ ] 2.1 Service   │    │ [ ] 3.1 Route    │
-│ [x] 1.2 Types    │──► │ [ ] 2.2 Repo      │──► │ [ ] 3.2 Verify   │
-└──────────────────┘    └──────────────────┘    └──────────────────┘
-      complete               up next                  pending
-```
-
-#### `/kelar:fix`
-
-```
-INTAKE → TRACE (3+ levels) → ROOT CAUSE → IMPACT → OPTIONS → YOU CHOOSE → FIX
-```
-
-You always choose the fix approach. Contract verified on completion.
-
-#### `/kelar:quick`
-
-Small tasks. Full guardrails, no heavy planning. Still self-checks. Still commits.
 
 ---
 
 ## Session Continuity
 
-Built for real-world constraints — free tier limits, context windows, model switches.
+Context limit? Model switch? KELAR doesn't lose context. Setiap sesi tersimpan — resume kapanpun.
 
-```
-Limit approaching
-      │
-      ▼
-/kelar:pause
-  ├── .kelar/state/HANDOFF.md  ← exact checkpoint
-  ├── .kelar/state/TASKS.md    ← full progress
-  └── .kelar/state/DIARY.md    ← session summary
-      │
-      ▼
-New session — any model
-      │
-      ▼
-/kelar:resume
-  └── "Continue from: task 2.1 (Service layer)?"
-      │
-      ▼
-Zero context lost. Exactly where you left off.
-```
+```mermaid
+sequenceDiagram
+    participant U as You
+    participant K as KELAR
+    participant F as .kelar/state/
 
-> 💡 **Indo:** Sering kena limit atau harus ganti model? `/kelar:pause` sebelum konteks habis. `/kelar:resume` di sesi baru. Ga ada yang ilang.
+    U->>K: /kelar:pause
+    K->>F: Write HANDOFF.md
+    K->>F: Append DIARY.md
+    K->>F: Update TASKS.md
+    K-->>U: "Resume with: /kelar:resume"
+
+    note over U,F: New session, any model
+
+    U->>K: /kelar:resume
+    K->>F: Read HANDOFF.md + TASKS.md
+    K-->>U: "Continue from: [exact next step]?"
+    U->>K: yes
+    K->>K: Execute next step
+```
 
 ---
 
-## State Files
+## kelar-tools
 
-Everything KELAR generates lives in `.kelar/state/` — never in your project root. Your codebase stays clean.
+A CLI utility powering all agents and workflows internally. You can also use it directly.
 
-| File | Tracks | Updated by |
-|------|--------|------------|
-| `STATE.md` | Architecture, conventions, history | `/kelar:map`, decisions |
-| `TASKS.md` | Active micro-task tracker | Every completed task |
-| `PATTERNS.md` | Approved architectural decisions (permanent) | Every approval |
-| `ASSUMPTIONS.md` | Pending + verified assumptions | Every assumption |
-| `DEBT.md` | Tech debt log — priority + time estimate | Every out-of-scope observation |
-| `DIARY.md` | Session history | Every `/kelar:pause` |
-| `HANDOFF.md` | Resume checkpoint | Every `/kelar:pause` |
-
-All files are **append-only**. Full project memory, always intact.
+```bash
+node .kelar/kelar-tools.cjs health               # check system integrity
+node .kelar/kelar-tools.cjs state snapshot       # project state as JSON
+node .kelar/kelar-tools.cjs tasks log done "..."  # log task completion
+node .kelar/kelar-tools.cjs memory search "jwt"  # search knowledge base
+node .kelar/kelar-tools.cjs memory save technical "title" "content"
+node .kelar/kelar-tools.cjs git commit "feat(kelar): add UserService"
+node .kelar/kelar-tools.cjs git checkpoint       # stash before risky change
+node .kelar/kelar-tools.cjs plan validate .kelar/plans/feat-plan.xml
+node .kelar/kelar-tools.cjs debt add "file.ts" "N+1 query" "HIGH"
+```
 
 ---
 
@@ -251,108 +240,47 @@ All files are **append-only**. Full project memory, always intact.
 
 ```
 your-project/
+├── AGENTS.md                    ← universal agent config (all tools)
+├── CLAUDE.md                    ← Claude Code overrides
+├── GEMINI.md                    ← Antigravity overrides
 │
-├── .kelar/                              ← everything KELAR lives here
-│   ├── rules/
-│   │   ├── code-quality.md             # zero hardcode, clean code, auto-commit
-│   │   ├── scope-guard.md              # surgical scope
-│   │   └── consistency.md              # mirror existing patterns
-│   │
-│   ├── skills/
-│   │   ├── pattern-memory/SKILL.md
-│   │   ├── reasoning-quality/SKILL.md
-│   │   ├── impact-radar/SKILL.md
-│   │   ├── execution-efficiency/SKILL.md
-│   │   ├── pre-execution/SKILL.md
-│   │   ├── deep-debug/SKILL.md
-│   │   ├── consistency-guard/SKILL.md
-│   │   └── safe-execution/SKILL.md
-│   │
-│   ├── workflows/
-│       ├── kelar-map.md
-│       ├── kelar-feature.md
-│       ├── kelar-fix.md
-│       ├── kelar-quick.md
-│       ├── kelar-pause.md
-│       └── kelar-resume.md
-│   │
-│   ├── state/                           ← auto-managed, never edit manually
-│   │   ├── STATE.md
-│   │   ├── TASKS.md
-│   │   ├── PATTERNS.md
-│   │   ├── ASSUMPTIONS.md
-│   │   ├── DEBT.md
-│   │   ├── DIARY.md
-│   │   └── HANDOFF.md
-│   │
-│   └── scripts/                         ← generated CLI scripts
-│
-├── your-source-code/                    ← untouched by KELAR internals
-└── ...
+└── .kelar/
+    ├── kelar-tools.cjs          ← CLI utility (30+ commands)
+    ├── agents/                  ← 9 specialized sub-agents
+    ├── skills/                  ← 14 context-triggered protocols
+    ├── workflows/               ← 6 command flows
+    ├── rules/                   ← 3 always-on guardrails
+    ├── state/                   ← session tracking (not committed)
+    │   ├── STATE.md
+    │   ├── TASKS.md
+    │   ├── PATTERNS.md
+    │   └── HANDOFF.md
+    └── memory/                  ← knowledge base (committed)
+        ├── domain/
+        ├── technical/
+        └── solutions/
 ```
-
----
-
-## Configuration
-
-Your preferences live at `~/.kelar/config.json`:
-
-```json
-{
-  "agents": ["antigravity", "claude"],
-  "scope": "local",
-  "autoCommit": "auto",
-  "commitKelar": "no-state",
-  "language": "en"
-}
-```
-
-Re-run `npx kelar-cli@latest init` anytime to update preferences.
-
-**`autoCommit`** options:
-- `"auto"` — commit after every micro-task automatically
-- `"ask"` — prompt before each commit  
-- `"off"` — manual commits only
-
-**`commitKelar`** options:
-- `"all"` — commit everything (share with team)
-- `"no-state"` — commit rules/skills, ignore `.kelar/state/` (recommended)
-- `"none"` — add all of `.kelar/` to `.gitignore`
-
----
-
-## Philosophy
-
-Five principles. No exceptions.
-
-1. **Plan before code** — AI never writes a line without an approved plan. The gate is mandatory.
-2. **Atomic tasks** — Every unit of work is small enough to verify, track, and revert independently.
-3. **Append-only memory** — State files are never overwritten. History is permanent.
-4. **Explicit over implicit** — AI states what it will do. You approve. Then it does it.
-5. **Surgical scope** — AI operates only on what it's asked to operate on. Precision over convenience.
 
 ---
 
 ## Compatibility
 
-| Agent | Support | Install Path |
-|-------|---------|-------------|
-| Antigravity | ✅ Full | `.agent/` |
-| Claude Code | ✅ Full | `.claude/` |
-| Cursor | ✅ Rules | `.cursor/rules/` |
-| Windsurf | ✅ Rules | `.windsurf/rules/` |
+| Agent | Rules | Skills | Workflows | Agents |
+|-------|-------|--------|-----------|--------|
+| Claude Code | ✅ | ✅ | ✅ | ✅ |
+| Antigravity | ✅ | ✅ | ✅ | ✅ |
+| Cursor | ✅ | — | — | — |
+| Windsurf | ✅ | — | — | — |
 
 ---
 
-## Contributing
+## Philosophy
 
-Does this make AI more precise, more consistent, or more resilient? If yes, it belongs in KELAR. PRs welcome.
-
----
-
-## License
-
-MIT — use it, fork it, improve it, ship it.
+1. **Plan before code** — no line is written without an approved plan
+2. **Atomic tasks** — every unit of work is small enough to verify and revert independently
+3. **Append-only memory** — state files are never overwritten; history is permanent
+4. **Explicit over implicit** — agents declare what they'll do, you approve, then they do it
+5. **Surgical scope** — touch only what was declared; everything else goes to `DEBT.md`
 
 ---
 
@@ -361,16 +289,16 @@ MIT — use it, fork it, improve it, ship it.
 <br/>
 
 ```
-Built by developers who hired AI to do the work,
-then spent twice as long managing the AI.
+Powered by AI,
+optimized by trial and error… berkali-kali 😄
 ```
-
-*Dibuat oleh developer yang hire AI buat kerja, lalu habiskan dua kali lebih banyak waktu buat ngatur AI-nya.*
 
 <br/>
 
 ```bash
 npx kelar-cli@latest init
 ```
+
+MIT License · [zeative/kelar](https://github.com/zeative/kelar)
 
 </div>
