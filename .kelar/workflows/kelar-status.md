@@ -1,47 +1,60 @@
 ---
 name: kelar:status
-description: View current progress, what's done, what's next, and any open decisions or deferred observations.
+description: Rich project dashboard. Shows active task, progress, recent activity, debt, and memory stats. Uses kelar-tools for fast structured data.
 allowed-tools:
+  - Bash
   - Read
 ---
 
 # /kelar:status
 
-Snapshot of where things stand right now.
+{{LANGUAGE}}
 
-## READS
-`.kelar/state/TASKS.md` + `.kelar/state/STATE.md` + `.kelar/state/HANDOFF.md` (if exists)
-
-## OUTPUT
-
-```
-KELAR STATUS
-────────────
-Working on  : [feature/fix or "nothing active"]
-Progress    : [N/total] tasks ([%]%)
-
-COMPLETED
-[x] [task 1]
-[x] [task 2]
-
-← YOU ARE HERE →
-[ ] [current task]
-
-UPCOMING
-[ ] [next]
-[ ] [after]
-
-OPEN DECISIONS
-- [waiting for user input]
-
-NEXT ACTION
-→ [exact next step]
+```bash
+# Collect all data in parallel
+SNAPSHOT=$(node .kelar/kelar-tools.cjs state snapshot)
+ACTIVE=$(node .kelar/kelar-tools.cjs tasks active)
+DEBT=$(node .kelar/kelar-tools.cjs debt list)
+PATTERNS=$(node .kelar/kelar-tools.cjs patterns list)
+GIT=$(node .kelar/kelar-tools.cjs git status)
+HEALTH=$(node .kelar/kelar-tools.cjs health)
 ```
 
-## KELAR NOTICES (if any in DEBT.md)
+Present as dashboard:
 
 ```
-Deferred observations:
-- [file]: [issue] → /kelar:quick [suggested fix]
-Address these? (yes/skip)
+╔══════════════════════════════════════════════════════╗
+║              KELAR STATUS DASHBOARD                  ║
+╚══════════════════════════════════════════════════════╝
+
+📦 PROJECT
+  Stack    : [from snapshot]
+  Type     : [from snapshot]
+
+🔄 ACTIVE TASK
+  [task name or "idle — awaiting instruction"]
+  Status   : [active / paused / idle]
+  Next step: [if paused]
+
+📊 PROGRESS
+  [progress bar if applicable]
+  [N tasks complete this session]
+
+🧠 MEMORY
+  Patterns  : [N approved]
+  Knowledge : [N entries in memory/]
+  Debt items: [N — N HIGH, N MEDIUM, N LOW]
+
+📁 GIT
+  Branch   : [branch name]
+  Changed  : [N files uncommitted]
+
+⚠ HIGH PRIORITY DEBT
+  [list HIGH items if any, max 3]
+
+✅ SYSTEM HEALTH
+  [all checks passing / list failures]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NEXT: [suggested action based on current state]
 ```

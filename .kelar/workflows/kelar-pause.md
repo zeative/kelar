@@ -1,70 +1,34 @@
 ---
 name: kelar:pause
-description: Save full session state before stopping work, hitting context limits, or switching models. Writes HANDOFF.md and session diary so work can resume exactly where it left off.
+description: Save complete session state before stopping. Writes HANDOFF.md and diary using kelar-tools.
 allowed-tools:
-  - Read
-  - Write
   - Bash
+  - Read
 ---
 
 # /kelar:pause
 
-Save everything before stopping. Zero context lost on resume.
+{{LANGUAGE}}
 
-## STEPS
+```bash
+# Commit any uncommitted work first
+node .kelar/kelar-tools.cjs git status
 
-1. Read `.kelar/state/TASKS.md` and `.kelar/state/STATE.md`
-2. Identify last completed task and exact next pending task
-3. Write `.kelar/state/HANDOFF.md`:
+# Write complete handoff
+node .kelar/kelar-tools.cjs handoff write
 
-```markdown
-# KELAR HANDOFF
-Generated: [timestamp]
-
-## Status
-Last completed : [micro-task] in [file]
-Next task      : [exact next micro-task to execute]
-Wave           : [N] of [total]
-Progress       : [N/total] tasks complete
-
-## Context
-Feature/Fix : [what's being worked on]
-Goal        : [one sentence]
-Approach    : [chosen approach]
-
-## Files Modified So Far
-- [file] — [what changed]
-
-## Files Pending
-- [file] — [what needs to happen]
-
-## Open Decisions
-- [anything unresolved / waiting for user input]
-
-## How To Resume
-1. Read this file
-2. Read .kelar/state/STATE.md
-3. Run /kelar:resume
+# End session (writes diary entry)
+node .kelar/kelar-tools.cjs session end
 ```
 
-4. Append to `.kelar/state/DIARY.md`:
-```markdown
-## [Date] [Time]
-Worked on : [feature/fix]
-Completed : [bullet list of done tasks]
-Decisions : [pattern decisions → PATTERNS.md]
-Debt      : [DEBT.md additions]
-Next      : [exact next task]
-Mood      : [honest codebase assessment]
-```
+Show confirmation:
 
-## OUTPUT
 ```
-KELAR PAUSED
-────────────
-Saved : .kelar/state/HANDOFF.md ✓
-Logged: .kelar/state/DIARY.md ✓
-Next  : [next task]
+KELAR PAUSED ⏸
+──────────────
+Handoff  : .kelar/state/HANDOFF.md ✓
+Diary    : .kelar/state/DIARY.md ✓
+Next step: [from handoff]
 
 Resume with: /kelar:resume
 ```

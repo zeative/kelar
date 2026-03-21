@@ -18,13 +18,13 @@ See before you apply. Undo in seconds if needed.
 
 Before ANY significant change:
 ```bash
-git add -A && git stash push -m "kelar-checkpoint-$(date +%Y%m%d-%H%M)-before-[task-slug]"
+node .kelar/kelar-tools.cjs git checkpoint
 ```
 
 ```
 KELAR CHECKPOINT CREATED
 ─────────────────────────
-Checkpoint: kelar-checkpoint-[timestamp]-before-[task]
+Checkpoint: kelar-checkpoint-[timestamp]
 Rollback  : git stash pop
 ```
 
@@ -62,14 +62,10 @@ Applied    : ✓
 Type check : PASSED / FAILED — [errors]
 ```
 
-If type check fails → offer immediate rollback.
-
-## /kelar:rollback
-
-```
-Available checkpoints:
-1. kelar-checkpoint-[timestamp]-before-[task] (most recent)
-Roll back to which? (1 / cancel)
+If type check fails → offer immediate rollback:
+```bash
+node .kelar/kelar-tools.cjs git checkpoint  # already done in phase 1
+# rollback: git stash pop
 ```
 
 ## ADAPTIVE

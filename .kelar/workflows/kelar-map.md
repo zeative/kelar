@@ -1,63 +1,61 @@
 ---
 name: kelar:map
-description: Scan and understand an existing codebase before starting any work. Writes architecture map to .kelar/state/STATE.md. Run once per project.
-argument-hint: "[area?]"
+description: Deep codebase analysis using kelar-codebase-mapper agent. Understands architecture, conventions, and anti-patterns. Writes to STATE.md and PATTERNS.md. Run once per project or after major restructures.
+argument-hint: "[area to focus on?]"
 allowed-tools:
   - Read
+  - Write
+  - Bash
   - Glob
   - Grep
-  - Bash
-  - Write
+  - Task
 ---
 
 # /kelar:map
 
-Analyze the codebase before any work begins.
+**Spawn kelar-codebase-mapper for deep parallel analysis.**
 
-## STEPS
+{{LANGUAGE}}
 
-1. Read top-level folder structure
-2. Identify layers (routes → controllers → services → repositories)
-3. Find 3-5 representative files per layer
-4. Extract: naming conventions, import/export patterns, error handling, async pattern
-5. If frontend: find design tokens, component library, state management
-6. Identify entry points and config files
+---
 
-## OUTPUT → `.kelar/state/STATE.md`
+## STEP 1: SPAWN MAPPER
 
-```markdown
-# Project State
-Last mapped: [timestamp]
+```
+Task: kelar-codebase-mapper
+Prompt: Map this codebase completely. Analyze architecture, conventions, patterns, and anti-patterns.
 
-## Architecture
-Type : [fullstack/backend/frontend/CLI]
-Stack: [technologies]
-Layers:
-  [layer] → [folder] → [responsibility]
+  Focus area (if specified): [user's argument or "full codebase"]
 
-## Conventions
-Naming    : [patterns]
-Async     : [pattern]
-Errors    : [pattern]
-Exports   : [pattern]
-UI Tokens : [if applicable]
-
-## Key Files
-[file] — [why important]
-
-## Anti-Patterns Found
-[pattern] — reason: [why to avoid]
+  Write your complete findings to:
+  - .kelar/state/STATE.md (architecture + conventions)
+  - .kelar/state/PATTERNS.md (approved patterns)
+  - .kelar/state/DEBT.md (anti-patterns found)
+  - .kelar/memory/INDEX.md (update with key gotchas)
 ```
 
-## OUTPUT TO USER
+Wait for mapper to complete. This may take a few minutes for large codebases.
+
+---
+
+## STEP 2: READ AND CONFIRM
+
+Read `.kelar/state/STATE.md` after mapper completes.
+
+Show summary to user:
 
 ```
 KELAR MAP COMPLETE
 ──────────────────
-Stack   : [stack]
-Layers  : [N]
-Patterns: [N documented]
-Issues  : [N anti-patterns noted]
+Stack     : [from STATE.md]
+Layers    : [N]
+Patterns  : [N documented]
+Debt items: [N found]
+
+Key things to know:
+1. [most important insight]
+2. [second insight]
+3. [third insight]
 
 Ready for: /kelar:feature or /kelar:fix
 ```

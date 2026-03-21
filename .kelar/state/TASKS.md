@@ -6,10 +6,7 @@ Last updated: {{DATE}}
 None
 
 ## Micro-Tasks
-> Populated by /kelar:feature or /kelar:fix
+> Populated during /kelar:feature or /kelar:fix
 
 ## Completed (append-only)
 > [x] [timestamp] [task] — DONE
-
-## KELAR Notices (deferred)
-> [file]: [observation] → /kelar:quick [fix]

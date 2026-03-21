@@ -65,8 +65,6 @@ KELAR DEPENDENTS
 Order: 1. core file → 2. [dependent A] → 3. [dependent B]
 ```
 
-Add as micro-tasks to `.kelar/state/TASKS.md`.
-
 ## ADAPTIVE
 New file (no dependents): skip Phase 1, still do Phase 2.
 Modifying existing, few dependents: quick grep + full contract.

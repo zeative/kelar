@@ -1,36 +1,52 @@
 ---
 name: kelar:resume
-description: Restore full context from last checkpoint and continue work exactly where it left off. Works across sessions, model switches, and context resets.
+description: Restore full context and continue exactly where you left off. Uses kelar-tools for fast structured context loading.
 allowed-tools:
-  - Read
   - Bash
+  - Read
 ---
 
 # /kelar:resume
 
-Pick up exactly where you left off. Any session, any model.
+{{LANGUAGE}}
 
-## STEPS
+```bash
+# Load everything at once
+HEALTH=$(node .kelar/kelar-tools.cjs health)
+HANDOFF=$(node .kelar/kelar-tools.cjs handoff read)
+ACTIVE=$(node .kelar/kelar-tools.cjs tasks active)
+SNAPSHOT=$(node .kelar/kelar-tools.cjs state snapshot)
+PATTERNS_COUNT=$(node .kelar/kelar-tools.cjs patterns list | wc -l)
+```
 
-1. Read `.kelar/state/HANDOFF.md`
-2. Read `.kelar/state/STATE.md`
-3. Read `.kelar/state/TASKS.md`
+Present resume state:
 
-## OUTPUT
 ```
 KELAR RESUMED
 ─────────────
-Working on : [feature/fix]
-Progress   : [N/total] tasks complete
-Last done  : [last completed task]
-Up next    : [exact next task]
-Open items : [unresolved decisions, if any]
+Project  : [from snapshot]
+Feature  : [from handoff or active task]
+Status   : [active / paused at: X / idle]
+Next step: [from active.next_step or handoff.next_step]
 
-Proceed with: "[next task]"? (yes/no)
+Patterns loaded : [N]
+Memory entries  : [check INDEX.md line count]
+Last activity   : [from handoff.generated]
+
+Proceed with "[next step]"? (yes / new task / status)
 ```
 
-**Wait for confirmation before executing anything.**
+If HANDOFF not found and ACTIVE is idle:
+```
+No active session found.
 
-## IF HANDOFF.md MISSING
-Check STATE.md and TASKS.md directly.
-If neither exists → ask: "What were we working on? I'll reconstruct the context."
+Options:
+  A) Start new feature → /kelar:feature [description]
+  B) Map codebase first → /kelar:map
+  C) Check status → /kelar:status
+```
+
+Log resume:
+```bash
+node .kelar/kelar-tools.cjs tasks log note "SESSION RESUMED — continuing: [next step]"
+```

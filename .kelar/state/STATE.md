@@ -3,8 +3,6 @@
 Last updated: {{DATE}}
 
 ## Architecture
-> Populated by /kelar:map
-
 Type  : [not yet mapped — run /kelar:map]
 Stack : []
 Layers: []

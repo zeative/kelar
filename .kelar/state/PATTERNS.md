@@ -10,15 +10,3 @@ Last updated: {{DATE}}
 
 ## Approved Patterns
 > Will populate during development.
-
-## Categories to Fill
-- [ ] Error handling
-- [ ] API response shape
-- [ ] Async pattern
-- [ ] Type definitions
-- [ ] Import order
-- [ ] State management
-- [ ] Component structure
-- [ ] Testing approach
-- [ ] Logging style
-- [ ] Environment variable access

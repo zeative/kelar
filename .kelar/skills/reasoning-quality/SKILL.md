@@ -18,7 +18,7 @@ Think before you build. Attack your own plan before anyone else does.
 
 ## PHASE 1: RUBBER DUCK
 
-Before planning anything, explain the task to yourself out loud:
+Before planning anything, explain the task to yourself:
 
 ```
 KELAR RUBBER DUCK

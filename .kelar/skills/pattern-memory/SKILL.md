@@ -17,7 +17,10 @@ Don't ask the same question twice. Don't assume silently.
 
 ## ON SESSION START
 
-1. Read `.kelar/state/PATTERNS.md`
+```bash
+node .kelar/kelar-tools.cjs patterns list
+```
+
 ```
 KELAR MEMORY LOADED
 ───────────────────
@@ -25,7 +28,7 @@ Patterns on file: [N]
 Key: [category]: [brief summary] (top 5)
 ```
 
-2. Read `.kelar/state/ASSUMPTIONS.md` — surface UNVERIFIED items:
+Check ASSUMPTIONS.md — surface UNVERIFIED items:
 ```
 KELAR ASSUMPTION CHECK
 ──────────────────────
@@ -36,12 +39,15 @@ KELAR ASSUMPTION CHECK
 
 ## BEFORE ANY PATTERN DECISION
 
-1. Check `.kelar/state/PATTERNS.md` — if found, apply silently:
-   `Using established pattern for [topic]: [pattern] (approved [date])`
+```bash
+node .kelar/kelar-tools.cjs patterns get "[category]"
+```
 
-2. If not found → scan codebase (read 2-3 files)
-   If found → use it AND append to PATTERNS.md
-
+1. If found → apply silently: `Using established pattern for [topic]: [pattern] (approved [date])`
+2. If not found → scan codebase (read 2-3 files). If found → use AND save:
+```bash
+node .kelar/kelar-tools.cjs patterns set "[category]" "[pattern description]"
+```
 3. If not found anywhere:
 ```
 KELAR PATTERN DECISION
@@ -52,7 +58,7 @@ B) [approach] — [tradeoff]
 Recommended: [A/B] because [reason]
 Your choice?
 ```
-After approval → immediately append to `.kelar/state/PATTERNS.md`
+After approval → save immediately.
 
 ## WHEN MAKING AN ASSUMPTION
 
@@ -63,7 +69,8 @@ KELAR ASSUMPTION
     Because : [why — info not available]
     Risk    : [what breaks if wrong]
 ```
-Append to `.kelar/state/ASSUMPTIONS.md` immediately.
+
+Append to `.kelar/state/ASSUMPTIONS.md`.
 
 ## ADAPTIVE
 Small task: load patterns silently, only surface HIGH risk assumptions.
