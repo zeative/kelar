@@ -63,11 +63,12 @@ function installWorkflows(destDir, vars) {
 function installStateFiles(stateDir) {
   const date = new Date().toISOString().split('T')[0];
   const vars = { DATE: date };
-  for (const file of fs.readdirSync(KELAR_SRC)) {
+  const src = path.join(KELAR_SRC, 'state');
+  for (const file of fs.readdirSync(src)) {
     if (file.endsWith('.md')) {
       const dest = path.join(stateDir, file);
       if (!fs.existsSync(dest)) {
-        copyWithVars(path.join(KELAR_SRC, file), dest, vars);
+        copyWithVars(path.join(src, file), dest, vars);
       }
     }
   }
