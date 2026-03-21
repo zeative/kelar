@@ -2,12 +2,12 @@
 'use strict';
 
 const { init } = require('../src/index');
-const [,, command] = process.argv;
+const [, , command] = process.argv;
 
 if (!command || command === 'init') {
   init().catch(err => { console.error('\n  Error:', err.message); process.exit(1); });
 } else if (command === '--version' || command === '-v') {
-  console.log(require('../package.json').version);
+  console.log(require('../kelar-complete-final/kelar-final/package.json').version);
 } else if (command === '--help' || command === '-h') {
   console.log(`
   kelar [command]

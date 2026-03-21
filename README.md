@@ -4,15 +4,14 @@
 
 **Kept Efficient, Logical, Atomic, Resilient**
 
-> *"Lo nggak asal vibe coding. Lo KELAR-in."*
+*The AI execution system for developers who are done babysitting.*
+*Sistem eksekusi AI untuk developer yang sudah bosan ngatur-ngatur AI-nya.*
 
 [![npm](https://img.shields.io/npm/v/kelar-cli?style=flat-square&color=000)](https://npmjs.com/package/kelar-cli)
 [![license](https://img.shields.io/badge/license-MIT-000?style=flat-square)](./LICENSE)
 [![works with](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Antigravity%20·%20Cursor-000?style=flat-square)](.)
 
-```bash
-npx kelar-cli@latest init
-```
+> ```npx kelar-cli@latest init```
 
 </div>
 
@@ -288,16 +287,12 @@ your-project/
 
 <br/>
 
-```
-Powered by AI,
-optimized by trial and error… berkali-kali 😄
-```
 
-<br/>
+> ***Powered by AI,<br/>
+optimized by trial and error… berkali-kali 😄***
 
-```bash
-npx kelar-cli@latest init
-```
+
+> `npx kelar-cli@latest init`
 
 MIT License · [zeative/kelar](https://github.com/zeative/kelar)
 
