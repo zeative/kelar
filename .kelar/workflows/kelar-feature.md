@@ -40,7 +40,6 @@ Out of scope: [list]
 Save to `.kelar/state/STATE.md` under `## Current Feature`.
 
 ## STEP 2: EXPLORE + CONSISTENCY
-
 Run `pre-execution` skill Phase 1+2.
 Run `consistency-guard` skill Phase 1+2.
 
@@ -71,7 +70,7 @@ For each micro-task:
 1. Implement
 2. Self-check from `code-quality` rule
 3. Append to `.kelar/state/TASKS.md`: `[x] [timestamp] [task] — DONE`
-4. Commit if autoCommit is enabled: `git add [files] && git commit -m "feat(kelar): [task]"`
+4. {{COMMIT_BEHAVIOR}}
 
 After each wave:
 ```

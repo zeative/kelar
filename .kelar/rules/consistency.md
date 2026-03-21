@@ -1,4 +1,5 @@
 # Consistency
+## Status: ALWAYS ON
 
 The best code looks like it was written by one person. Be that person.
 

@@ -1,11 +1,11 @@
 ---
 name: reasoning-quality
 description: >
-  Improves reasoning quality before complex tasks using rubber duck and devil's advocate
-  techniques. This skill should be used before executing complex features, architectural
-  decisions, multi-file changes, security-critical code, or anything touching core business
-  logic. SKIP for: rename, simple 1-file add, copy-paste patterns.
-  RUN for: new feature, multi-file change, new pattern, unclear bug root cause.
+  Improves reasoning quality before complex tasks using rubber duck and devil's
+  advocate techniques. Activate before complex features, architectural decisions,
+  multi-file changes, or security/performance-critical code.
+  SKIP for: rename, simple 1-file add. RUN for: new feature, multi-file change,
+  new pattern, unclear bug root cause.
 allowed-tools:
   - Read
   - Glob
@@ -45,14 +45,9 @@ KELAR DEVIL'S ADVOCATE
 ❓ Edge case: [case]
    → Impact: [what happens] → Handled by: [how / "flagging to user"]
 
-❓ Performance concern: [what could be slow]
-   → At scale: [impact] → Mitigation: [approach]
-
-❓ Security concern: [what could be exploited]
-   → Risk: [severity] → Mitigation: [approach]
-
-❓ Simpler approach?
-   → Alternative: [desc] → Why NOT using it: [reason]
+❓ Performance: [concern] → At scale: [impact] → Mitigation: [approach]
+❓ Security: [concern] → Risk: [severity] → Mitigation: [approach]
+❓ Simpler approach? → [alternative] → Why NOT using it: [reason]
 
 Verdict: SOLID / NEEDS ADJUSTMENT ([changes]) / CRITICAL FLAW ([rethink])
 ```

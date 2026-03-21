@@ -1,6 +1,6 @@
 ---
 name: kelar:map
-description: Scan and understand an existing codebase before starting any work. Writes architecture map to .kelar/state/STATE.md.
+description: Scan and understand an existing codebase before starting any work. Writes architecture map to .kelar/state/STATE.md. Run once per project.
 argument-hint: "[area?]"
 allowed-tools:
   - Read
@@ -12,7 +12,7 @@ allowed-tools:
 
 # /kelar:map
 
-Analyze the codebase before any work begins. Run this once per project.
+Analyze the codebase before any work begins.
 
 ## STEPS
 
@@ -20,7 +20,7 @@ Analyze the codebase before any work begins. Run this once per project.
 2. Identify layers (routes → controllers → services → repositories)
 3. Find 3-5 representative files per layer
 4. Extract: naming conventions, import/export patterns, error handling, async pattern
-5. If frontend exists: find design tokens, component library, state management
+5. If frontend: find design tokens, component library, state management
 6. Identify entry points and config files
 
 ## OUTPUT → `.kelar/state/STATE.md`

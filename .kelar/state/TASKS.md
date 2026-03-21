@@ -1,32 +1,15 @@
 # KELAR Tasks
 > Micro-task tracker. Updated after every completed task.
-> This file is your session continuity lifeline.
+Last updated: {{DATE}}
 
-Last updated: [timestamp]
-
----
-
-## Active Feature/Fix
-[name] — started [timestamp]
+## Active
+None
 
 ## Micro-Tasks
+> Populated by /kelar:feature or /kelar:fix
 
-### Wave 1
-- [ ] 1.1 [task description] → [file] → done when: [condition]
-- [ ] 1.2 [task description] → [file] → done when: [condition]
+## Completed (append-only)
+> [x] [timestamp] [task] — DONE
 
-### Wave 2
-- [ ] 2.1 [task description] → [file] → done when: [condition]
-
----
-
-## Completed Tasks (append-only)
-
-- [x] [timestamp] [task description] — DONE
-- [x] [timestamp] [task description] — DONE
-
----
-
-## KELAR Notices (deferred observations)
-
-- [ ] [file]: [observation] → suggested: /kelar:quick [fix]
+## KELAR Notices (deferred)
+> [file]: [observation] → /kelar:quick [fix]

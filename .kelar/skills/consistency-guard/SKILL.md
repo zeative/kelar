@@ -2,10 +2,10 @@
 name: consistency-guard
 description: >
   Ensures new code matches existing patterns at both UI and backend levels.
-  This skill should be used when working on UI components, creating new modules,
-  adding new files to existing layers, or when the user asks to match/follow/be
-  consistent with existing style. Triggers on: "component", "UI", "design", "style",
-  "layout", "page", "screen", "match existing", "follow the pattern".
+  Activate when working on UI components, creating new modules, adding new files
+  to existing layers, or when user asks to match/follow/be consistent with
+  existing style.
+  Triggers on: "component", "UI", "design", "style", "layout", "page", "screen"
 allowed-tools:
   - Read
   - Glob
@@ -21,7 +21,7 @@ Every new piece must look and feel like it was always there.
 **For UI:**
 ```
 Ref files  : [2-3 most similar components/pages]
-Spacing    : [values in use — e.g. 4, 8, 16, 24px]
+Spacing    : [values in use]
 Colors     : [tokens — e.g. var(--color-primary)]
 Components : [structure pattern]
 States     : [loading/error/empty patterns]
@@ -52,7 +52,7 @@ Will NOT invent: [things that already exist]
 
 ## PHASE 3: DEVIATION ALERT
 
-If REQUIRED to deviate from existing patterns:
+If REQUIRED to deviate:
 ```
 KELAR DEVIATION ALERT
 ─────────────────────
@@ -69,11 +69,10 @@ Approve deviation? (yes/no)
 ## PHASE 4: VERIFICATION
 
 **UI:**
-- [ ] Only existing color tokens (no new hex/rgb values)
-- [ ] Existing spacing scale (no arbitrary pixel values)
+- [ ] Only existing color tokens (no new hex/rgb)
+- [ ] Existing spacing scale (no arbitrary values)
 - [ ] Component structure matches reference
 - [ ] Loading/error/empty states match existing
-- [ ] Responsive behavior matches existing
 
 **Backend:**
 - [ ] Function signatures match layer conventions

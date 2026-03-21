@@ -1,54 +1,26 @@
 # Project State
-> Managed by KELAR. Updated automatically after each session.
-> Do not delete this file. Edit with care.
-
-Last updated: [timestamp]
-Last command: [/kelar:xxx]
-
----
+> Managed by KELAR. Never delete this file.
+Last updated: {{DATE}}
 
 ## Architecture
 > Populated by /kelar:map
 
-Type  : [fullstack / backend / frontend / CLI]
-Stack : [technologies]
-
-Layers:
-- [layer] → [folder] → [responsibility]
+Type  : [not yet mapped — run /kelar:map]
+Stack : []
+Layers: []
 
 ## Conventions
 > Populated by /kelar:map
 
-Naming    : [patterns]
-Async     : [pattern]
-Errors    : [pattern]
-Exports   : [pattern]
-
 ## Current Feature
-> Updated by /kelar:feature
-
-Working on  : [feature name or "nothing"]
-Goal        : [one sentence]
-Progress    : [N/total tasks]
-Started     : [timestamp]
+Working on  : nothing
+Progress    : 0/0
 
 ## Decisions Made
-> Append-only. Never delete.
-
-- [timestamp] [decision] — reason: [why]
+> Append-only.
 
 ## Completed Work
-> Append-only. Never delete.
+> Append-only.
 
-- [timestamp] Feature: [name] — [brief summary]
-- [timestamp] Fix: [name] — [root cause + fix]
-
-## Anti-Patterns (Project-Specific)
-> Things we've learned NOT to do in this codebase.
-
-- [pattern to avoid] — reason: [why]
-
-## Open Questions
-> Things waiting for a decision.
-
-- [ ] [question] — raised: [timestamp]
+## Anti-Patterns
+> Things learned NOT to do in this codebase.

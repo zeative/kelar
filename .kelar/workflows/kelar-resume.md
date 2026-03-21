@@ -20,7 +20,7 @@ Pick up exactly where you left off. Any session, any model.
 ```
 KELAR RESUMED
 ─────────────
-Working on : [feature/fix from HANDOFF]
+Working on : [feature/fix]
 Progress   : [N/total] tasks complete
 Last done  : [last completed task]
 Up next    : [exact next task]

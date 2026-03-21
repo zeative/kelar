@@ -1,11 +1,11 @@
 ---
 name: deep-debug
 description: >
-  Handles systematic debugging with root cause analysis. This skill should be used when
-  the user reports an error, bug, unexpected behavior, or asks to fix something broken.
-  Triggers on: "error", "bug", "broken", "fix", "not working", "fails", "crash",
-  "wrong output", "exception", "undefined", "null", "TypeError", "cannot read".
+  Handles systematic debugging with root cause analysis. Activate when user
+  reports an error, bug, unexpected behavior, or asks to fix something broken.
   Always trace to root cause — never patch symptoms.
+  Triggers on: "error", "bug", "broken", "fix", "not working", "fails", "crash",
+  "wrong output", "exception", "undefined", "null", "TypeError"
 allowed-tools:
   - Read
   - Glob
@@ -29,7 +29,7 @@ Expected: [should happen]
 Actual  : [happens instead]
 ```
 
-If stack trace is missing → ask for it before proceeding. Do not guess.
+If stack trace missing → ask for it before proceeding. Do not guess.
 
 ## PHASE 2: TRACE
 
@@ -48,10 +48,10 @@ KELAR ROOT CAUSE
 ────────────────
 Root cause  : [ONE sentence — what is actually wrong]
 Why it fails: [the mechanism]
-Why not caught: [missing validation? wrong assumption? edge case?]
+Why not caught: [missing validation? wrong assumption?]
 ```
 
-Do not proceed to fixes until root cause is clear.
+Do not proceed until root cause is clear.
 If uncertain → state two hypotheses + how to verify each.
 
 ## PHASE 4: IMPACT

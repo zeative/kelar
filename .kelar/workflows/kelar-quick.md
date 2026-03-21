@@ -45,9 +45,8 @@ File  : [file:line]
 Check : code quality passed ✓
 ```
 
-5. Append to `.kelar/state/TASKS.md`: `[x] [timestamp] quick: [task] — DONE`
-
-6. Commit if autoCommit enabled: `git add [files] && git commit -m "feat(kelar): [task]"`
+5. {{COMMIT_BEHAVIOR}}
+6. Append to `.kelar/state/TASKS.md`: `[x] [timestamp] quick: [task] — DONE`
 
 ## STILL APPLIES
 All rules: zero hardcode, scope guard, consistency.

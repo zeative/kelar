@@ -1,6 +1,5 @@
 # Code Quality
-
-Zero hardcode. Scan before write. Clean code. Error handling mandatory. Self-check before done.
+## Status: ALWAYS ON
 
 ## 1. ZERO HARDCODE
 Never hardcode values that belong in config, env, or constants.
@@ -34,7 +33,11 @@ Before writing any code:
 Every async/fallible operation MUST have error handling.
 Follow the error pattern already used in the codebase.
 
-## 6. SELF-CHECK BEFORE DONE
+## 6. COMMIT BEHAVIOR
+{{COMMIT_BEHAVIOR}}
+Commit format: `feat(kelar): [brief description]`
+
+## 7. SELF-CHECK BEFORE DONE
 - [ ] Zero hardcoded values
 - [ ] Naming matches codebase conventions
 - [ ] No function longer than 20 lines

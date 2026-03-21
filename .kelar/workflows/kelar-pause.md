@@ -1,6 +1,6 @@
 ---
 name: kelar:pause
-description: Save full session state before stopping work, hitting context limits, or switching models. Writes HANDOFF.md and session diary entry so work can resume exactly where it left off.
+description: Save full session state before stopping work, hitting context limits, or switching models. Writes HANDOFF.md and session diary so work can resume exactly where it left off.
 allowed-tools:
   - Read
   - Write

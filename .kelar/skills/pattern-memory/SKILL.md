@@ -1,10 +1,10 @@
 ---
 name: pattern-memory
 description: >
-  Manages cross-session architectural decisions and assumption tracking. This skill should
-  be used at the START of every session and before making any architectural decision.
-  Triggers on: session start, "how should we", "what pattern", "which approach",
-  any decision that will repeat across the codebase. Prevents asking the same question twice.
+  Manages cross-session architectural decisions and assumption tracking.
+  Activate at the START of every session and before any architectural decision.
+  Prevents asking the same question twice. Tracks all assumptions until verified.
+  Triggers on: session start, "how should we", "what pattern", "which approach"
 allowed-tools:
   - Read
   - Write
@@ -22,7 +22,7 @@ Don't ask the same question twice. Don't assume silently.
 KELAR MEMORY LOADED
 ───────────────────
 Patterns on file: [N]
-Key: [category]: [brief summary] (top 5 most recent)
+Key: [category]: [brief summary] (top 5)
 ```
 
 2. Read `.kelar/state/ASSUMPTIONS.md` — surface UNVERIFIED items:
@@ -36,10 +36,10 @@ KELAR ASSUMPTION CHECK
 
 ## BEFORE ANY PATTERN DECISION
 
-1. Check `.kelar/state/PATTERNS.md` — if found, apply silently, state:
+1. Check `.kelar/state/PATTERNS.md` — if found, apply silently:
    `Using established pattern for [topic]: [pattern] (approved [date])`
 
-2. If not in PATTERNS.md → scan codebase for implicit pattern (read 2-3 files)
+2. If not found → scan codebase (read 2-3 files)
    If found → use it AND append to PATTERNS.md
 
 3. If not found anywhere:

@@ -1,8 +1,10 @@
 # Scope Guard
+## Status: ALWAYS ON
 
-Touch only what you're asked to touch. You are a surgeon, not a janitor.
+You are a surgeon, not a janitor. Operate only on what you're asked to operate on.
 
 ## THE PRIME DIRECTIVE
+Touch nothing you were not asked to touch.
 Even if it looks wrong → leave it alone.
 Even if you could "improve" it → leave it alone.
 

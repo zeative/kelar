@@ -1,10 +1,10 @@
 ---
 name: pre-execution
 description: >
-  Handles planning and exploration before any code is written. This skill should be used
-  when the user asks to build, implement, create, add, make, write, update, or change anything
-  in the codebase. Triggers on: "build", "create", "implement", "add feature", "make",
-  "write", "update", "change". Do not write any code until this skill completes.
+  Handles planning and exploration before any code is written. Activate when
+  user asks to build, implement, create, add, make, write, update, or change
+  anything in the codebase. Do not write any code until this skill completes.
+  Triggers on: "build", "create", "implement", "add", "make", "write", "update", "change"
 allowed-tools:
   - Read
   - Glob
@@ -52,7 +52,7 @@ If anything is unclear → ask ONE clarifying question before continuing.
 
 ## PHASE 3: PLAN
 
-Break into micro-tasks. Each task = max 1-2 files, one responsibility, clear done condition.
+Break into micro-tasks. Each = max 1-2 files, one responsibility, clear done condition.
 
 ```
 KELAR PLAN
@@ -76,8 +76,7 @@ Recommended: [A/B] because [reason]
 ## PHASE 4: AWAIT APPROVAL
 
 **STOP. Do not write any code yet.**
-
-Present the plan. Wait for: "yes" / edits / "no".
+Present plan. Wait for: "yes" / edits / "no".
 Only after explicit approval → execute.
 
 ## EXECUTION

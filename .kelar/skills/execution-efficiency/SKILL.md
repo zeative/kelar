@@ -1,11 +1,12 @@
 ---
 name: execution-efficiency
 description: >
-  Optimizes execution by preferring CLI commands and scripts over manual file editing.
-  This skill should be used when a task involves repetitive changes across multiple files,
-  batch operations, codebase-wide renaming, code generation, or any task touching 4+ files
-  with the same pattern. Triggers on: "rename all", "replace across", "add to all files",
-  "generate", "scaffold", "migrate", "update all", any task touching 4+ files identically.
+  Optimizes execution by preferring CLI commands and scripts over manual file
+  editing. Activate when a task involves repetitive changes across multiple files,
+  batch operations, codebase-wide renaming, or any task touching 4+ files with
+  the same pattern.
+  Triggers on: "rename all", "replace across", "add to all", "generate",
+  "scaffold", "migrate", "update all", any task touching 4+ files identically.
 allowed-tools:
   - Bash
   - Write
@@ -20,15 +21,14 @@ A senior developer doesn't edit 20 files manually. They write a script.
 
 ## DECISION TREE
 
-Can this be done more efficiently with CLI or script than manual file editing?
+Can this be done more efficiently with CLI or script than manual editing?
 - YES → write script/command first, execute, verify
 - NO  → proceed with manual implementation
 
-**Signals a script is better:**
+Signals a script is better:
 - Same change in 3+ files
 - Pattern-based transformation (rename, wrap, add import)
 - Boilerplate generation (new module, CRUD, component)
-- Any operation: "do X to all files that Y"
 
 ## SCALE TABLE
 
