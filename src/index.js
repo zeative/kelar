@@ -123,11 +123,11 @@ async function init() {
   checkCancel(autoCommit);
 
   const commitKelar = await p.select({
-    message: 'Include .kelar/ in git commits?',
+    message: 'Commit agent files (.agent/ or .claude/) to git?',
     options: [
-      { value: 'no-state', label: 'Partial', hint: 'rules/skills committed, state ignored (recommended)' },
-      { value: 'all', label: 'All', hint: 'commit everything — share with team' },
-      { value: 'none', label: 'None', hint: 'add .kelar/ to .gitignore entirely' },
+      { value: 'no-state', label: 'Partial', hint: 'commit rules/skills/workflows, ignore .kelar/state/ (recommended)' },
+      { value: 'all', label: 'All', hint: 'commit everything including session state' },
+      { value: 'none', label: 'None', hint: 'ignore all KELAR files' },
     ],
     initialValue: prev.commitKelar || 'no-state',
   });
@@ -226,18 +226,33 @@ async function init() {
   p.outro('Start here → /kelar:map');
 }
 
-function handleGitignore(commitKelar, cwd) {
+function handleGitignore(commitKelar, cwd, agents, scope) {
   const gitignorePath = path.join(cwd, '.gitignore');
-  if (!fs.existsSync(gitignorePath)) return;
+  if (!fs.existsSync(gitignorePath)) {
+    fs.writeFileSync(gitignorePath, '');
+  }
 
   let content = fs.readFileSync(gitignorePath, 'utf8');
 
-  if (commitKelar === 'none' && !content.includes('.kelar')) {
-    content += '\n# KELAR\n.kelar/\n';
-    fs.writeFileSync(gitignorePath, content);
-  } else if (commitKelar === 'no-state' && !content.includes('.kelar/state')) {
-    content += '\n# KELAR — session state\n.kelar/state/\n.kelar/scripts/\n';
-    fs.writeFileSync(gitignorePath, content);
+  if (commitKelar === 'none') {
+    const lines = ['\n# KELAR'];
+    if (!content.includes('.kelar')) lines.push('.kelar/');
+    for (const agentKey of agents) {
+      const agentLocal = AGENTS[agentKey].local;
+      if (!content.includes(agentLocal)) lines.push(`${agentLocal}/`);
+    }
+    if (lines.length > 1) {
+      content += lines.join('\n') + '\n';
+      fs.writeFileSync(gitignorePath, content);
+    }
+  } else if (commitKelar === 'no-state') {
+    const lines = ['\n# KELAR — session state'];
+    if (!content.includes('.kelar/state')) lines.push('.kelar/state/');
+    if (!content.includes('.kelar/scripts')) lines.push('.kelar/scripts/');
+    if (lines.length > 1) {
+      content += lines.join('\n') + '\n';
+      fs.writeFileSync(gitignorePath, content);
+    }
   }
 }
 

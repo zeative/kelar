@@ -49,7 +49,7 @@ The result: instead of building, you're reviewing every line, re-explaining your
 ## Install
 
 ```bash
-npx kelar-cli init
+npx kelar-cli@latest init
 ```
 
 Your preferences are saved to `~/.kelar/config.json` and reused next time.
@@ -269,12 +269,12 @@ your-project/
 │   │   └── safe-execution/SKILL.md
 │   │
 │   ├── workflows/
-│   │   ├── map.md
-│   │   ├── feature.md
-│   │   ├── fix.md
-│   │   ├── quick.md
-│   │   ├── pause-resume.md
-│   │   └── status.md
+│       ├── kelar-map.md
+│       ├── kelar-feature.md
+│       ├── kelar-fix.md
+│       ├── kelar-quick.md
+│       ├── kelar-pause.md
+│       └── kelar-resume.md
 │   │
 │   ├── state/                           ← auto-managed, never edit manually
 │   │   ├── STATE.md
@@ -307,7 +307,7 @@ Your preferences live at `~/.kelar/config.json`:
 }
 ```
 
-Re-run `npx kelar-cli init` anytime to update preferences.
+Re-run `npx kelar-cli@latest init` anytime to update preferences.
 
 **`autoCommit`** options:
 - `"auto"` — commit after every micro-task automatically
@@ -370,7 +370,7 @@ then spent twice as long managing the AI.
 <br/>
 
 ```bash
-npx kelar-cli init
+npx kelar-cli@latest init
 ```
 
 </div>
